@@ -32,13 +32,13 @@ class PowerSaveBlocker final : public gin::Wrappable<PowerSaveBlocker> {
   gin::ObjectTemplateBuilder GetObjectTemplateBuilder(
       v8::Isolate* isolate) override;
 
+  // Make public for cppgc::MakeGarbageCollected.
+  explicit PowerSaveBlocker(v8::Isolate* isolate);
+  ~PowerSaveBlocker() override;
+
   // disable copy
   PowerSaveBlocker(const PowerSaveBlocker&) = delete;
   PowerSaveBlocker& operator=(const PowerSaveBlocker&) = delete;
-
- protected:
-  explicit PowerSaveBlocker(v8::Isolate* isolate);
-  ~PowerSaveBlocker() override;
 
  private:
   void UpdatePowerSaveBlocker();
